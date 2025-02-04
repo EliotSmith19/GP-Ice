@@ -54,9 +54,9 @@ gem "sassc-rails"
 gem "faker"
 gem 'ostruct'
 gem "cloudinary"
-
-
-
+gem "stripe"
+gem "stripe_event"
+gem "money-rails"
 
 group :development, :test do
   gem "dotenv-rails"

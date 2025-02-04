@@ -23,9 +23,13 @@ Rails.application.routes.draw do
   delete "cart/clear", to: "order_products#clear", as: :clear_cart
 
   resources :orders, only: %i[index show new create] do
+    resources :payments, only: :new
     resources :reviews, only: %i[index new create show]
     get "checkout", to: "orders#checkout", as: :checkout
   end
 
   resources :favourites, only: %i[index destroy create]
 end
+
+mount StripeEvent::Engine, at: '/stripe-webhooks'
+# End of file
