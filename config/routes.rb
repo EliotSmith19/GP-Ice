@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     resources :inventories
     # get "favourite" => "favourites#new"
     # post "favourite" => "favourites#create"
+
+    # Simulate Van Movement Route
+    post "simulate_movement", to: "vans#simulate_movement", as: :simulate_movement
   end
 
   get "cart", to: "order_products#show", as: :cart
@@ -22,7 +25,8 @@ Rails.application.routes.draw do
   delete "cart/remove/:id", to: "order_products#destroy", as: :remove_from_cart
   delete "cart/clear", to: "order_products#clear", as: :clear_cart
 
-  resources :orders, only: %i[index show new create] do
+
+  resources :orders, only: %i[index show new create tracking] do
     resources :payments, only: :new
     resources :reviews, only: %i[index new create show]
     get "checkout", to: "orders#checkout", as: :checkout
