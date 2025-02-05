@@ -2,7 +2,10 @@
   <% orders.each do |order| %>
     <div class="card-details">
       <p><%= order.id %></p>
-      <p><%= order.van_id %></p>
+      <div style="display: flex; justify-content: space-between;">
+         <p><%= order.van_id %></p>
+      <p><%= link_to "Van Details",van_path(order.van_id), data: { turbo: false } %></p>
+      </div>
       <p><%= order.confirmed_status %></p>
       <p><%= order.paid_status %></p>
       <p><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></p>
@@ -12,6 +15,7 @@
           <%= hidden_field_tag :order_id, order.id %>
           <p><%= link_to "Add Review", new_order_review_path(order), data: { turbo: false } %></p>
         <% end %>
+      <%= link_to "Track Order", van_tracking_path(order.van_id), data: {turbo: false} %>
       <% end %>
     </div>
   <% end %>

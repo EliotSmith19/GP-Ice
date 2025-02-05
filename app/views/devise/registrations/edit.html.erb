@@ -1,98 +1,67 @@
-<div class="container-form">
-  <div class="container">
-    <%= link_to "< Back", :back, class: "btn-main" %>
-  </div>
-  <div class="my-form">
-    <h2>Register your Ice Cream Van</h2>
-
-    <br>
-    <div class="container">
-      <%= link_to "Register Ice Cream Van", new_van_path, class: "btn-main" %>
-    </div>
-  </div>
+<div class ="btn-back">
+  <%= link_to "< Back", :back %>
 </div>
 
-<div class="container-form">
-  <div class="my-form">
-    <h2>Check my Favorites Vans</h2>
-    <br>
-    <div class="container">
-      <%= link_to "Favourites", favourites_path, class: "btn-main" %>
-    </div>
-  </div>
+<div class="profile-join">
+  <h1>Your profile</h1>
 </div>
 
-<div class="container-form">
-  <div class="my-form">
-    <h2>See My Orders List</h2>
-    <br>
-    <div class="container">
-      <%= link_to "My Orders", orders_path, class: "btn-main" %>
-    </div>
+<div class="profile-join">
+
+  <div class="profile-left">
+    <h5>Register Ice Cream Van</h5>
+    <%= link_to "Register", new_van_path, class: "btn-profile" %>
+    <hr class="product-line">
+
+    <h5>Favourite Vans</h5>
+    <%= link_to "Favourites", favourites_path, class: "btn-profile" %>
+    <hr class="product-line">
+
+    <h5>My Orders</h5>
+    <%= link_to "My Orders", orders_path, class: "btn-profile" %>
+    <hr class="product-line">
+
+    <% if current_user&&current_user.van %>
+      <h5>Customer Orders</h5>
+      <%= link_to "Requests", van_orders_path(current_user.van), class: "btn-profile" %>
+      <hr class="product-line">
+    <%end %>
+
+    <h5>My Account</h5>
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn-delete" %>
+    <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn-delete" %>
   </div>
-</div>
 
-<% if current_user&&current_user.van %>
-  <div class="container-form">
-    <div class="my-form">
-      <h2>See Requests from Customers</h2>
-      <br>
-      <div class="container">
-        <%= link_to "Requests", van_orders_path(current_user.van), class: "btn-main" %>
-      </div>
-
-    </div>
-  </div>
-<%end %>
-
-<div class="container-form">
-  <div class="my-form">
+  <div class="profile-right">
     <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= f.error_notification %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= f.error_notification %>
 
-      <div class="form-inputs">
-        <%= f.input :email, required: true, autofocus: true %>
+        <div class="form-inputs">
+          <%= f.input :email, required: true, autofocus: true %>
 
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-        <% end %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+          <% end %>
 
-        <%= f.input :password,
-                    hint: "leave it blank if you don't want to change it",
-                    required: false,
-                    input_html: { autocomplete: "new-password" } %>
-        <%= f.input :password_confirmation,
-                    required: false,
-                    input_html: { autocomplete: "new-password" } %>
-        <%= f.input :current_password,
-                    hint: "we need your current password to confirm your changes",
-                    required: true,
-                    input_html: { autocomplete: "current-password" } %>
-      </div>
+          <%= f.input :password,
+                      hint: "leave it blank if you don't want to change it",
+                      required: false,
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                      required: false,
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :current_password,
+                      hint: "we need your current password to confirm your changes",
+                      required: true,
+                      input_html: { autocomplete: "current-password" } %>
+        </div>
 
-      <div class="form-actions">
-        <%= f.button :submit, "Save", class: "btn-main" %>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="container-form">
-  <div class="my-form">
-    <h2>Cancel my account</h2>
-    <div>
-      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-main" %>
-    </div>
-    <br>
-    <div>
-      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-main" %>
-    </div>
-    <br>
+        <div class="form-actions">
+          <%= f.button :submit, "Save", class: "btn-main" %>
+        </div>
+      <% end %>
   </div>
 
-  <div class="container">
-    <%= link_to "< Back", :back, class: "btn-main" %>
-  </div>
 </div>

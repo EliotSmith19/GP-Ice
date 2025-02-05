@@ -1,0 +1,11 @@
+<h1>Tracking</h1>
+<div class="container-form">
+  <div class="my-form">
+    <div class="container" style="width: 100%; height: 600px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-location-value="<%= @location %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
+  </div>
+</div>

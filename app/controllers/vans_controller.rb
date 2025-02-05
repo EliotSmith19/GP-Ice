@@ -43,6 +43,11 @@ class VansController < ApplicationController
     @favourite = Favourite.find_by(van: @van, user: current_user)
   end
 
+  def tracking
+    @van = Van.find(params[:van_id])
+    
+  end
+
   private
 
   def van_find
