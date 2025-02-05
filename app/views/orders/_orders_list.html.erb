@@ -3,8 +3,8 @@
     <div class="card-details">
       <p><%= order.id %></p>
       <div style="display: flex; justify-content: space-between;">
-         <p><%= order.van_id %></p>
-      <p><%= link_to "Van Details",van_path(order.van_id), data: { turbo: false } %></p>
+         
+      <p><%= link_to "#{order.van.name.truncate(10)}",van_path(order.van_id), data: { turbo: false } %></p>
       </div>
       <p><%= order.confirmed_status %></p>
       <p><%= order.paid_status %></p>
