@@ -8,36 +8,41 @@
         <p>Confirmed</p>
         <p>Paid</p>
         <p>Created At</p>
-        <p>Actions</p>
+        <p>Confirmation</p>
+        <p>Cancelation</p>
       </div>
       <% @orders.each do |order| %>
         <div class="card-details">
           <p><%= order.id %></p>
           <p><%= order.user_id %></p>
-          <p class="fa-checkmark"><i class="fa-solid fa-check fa-lg"></i></p>
-            <% if order.paid_status  == true %>
+          <% if order.confirmed_status  == true %>
             <p class="fa-checkmark"><i class="fa-solid fa-check fa-lg"></i></p>
-            <% else %>
+          <% else %>
             <p class="fa-cross"><i class="fa-solid fa-times fa-lg"></i></p>
-            <% end %>
+          <% end %>
+          <% if order.paid_status  == true %>
+            <p class="fa-checkmark"><i class="fa-solid fa-check fa-lg"></i></p>
+          <% else %>
+            <p class="fa-cross"><i class="fa-solid fa-times fa-lg"></i></p>
+          <% end %>
           <p><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></p>
           <div class="actions">
             <div>
               <% unless order.confirmed_status %>
-              <%= button_to 'Confirm', van_order_path(order.van, order), method: :patch, class: 'btn btn-confirm' %>
-            <% end %>
-            <div class="check-action">
-            <% if order.confirmed_status == true %>
-            <p class="fa-checkmark"><i class="fa-solid fa-check fa-lg"></i></p>
-            <% end %>
-            </div>
-            </div>
-            <div>
-            <%= button_to 'Cancel', van_order_path(order.van, order), method: :delete, class: 'btn btn-cancel' %>
+              <div>
+                <%= button_to 'Confirm', van_order_path(order.van, order), method: :patch, class: 'btn btn-confirm' %>
+              </div>
+              <% end %>
             </div>
           </div>
-        </div>
+          <div class="actions">
+            <div>
+              <%= button_to 'Cancel', van_order_path(order.van, order), method: :delete, class: 'btn btn-cancel' %>
+            </div>
+          </div>
+          </div>
       <% end %>
+      </div>
     </div>
   </div>
 </div>

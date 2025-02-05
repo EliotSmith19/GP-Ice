@@ -45,6 +45,11 @@ class VansController < ApplicationController
     # @product = @inventories.find_by(product_id: params[:id])
   end
 
+  def tracking
+    @van = Van.find(params[:van_id])
+    
+  end
+
   private
 
   def van_find

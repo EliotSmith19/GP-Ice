@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
 
   def index
-    @orders = Order.where(user_id: current_user)
+    @orders = Order.where(user_id: current_user.id)
     @vans = @orders.map(&:van).uniq
     if params[:van_id].present?
       @selected_van = Van.find(params[:van_id])
@@ -43,11 +43,11 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order_product = OrderProduct.find(params[:id])
-    if @order_product.update(order_product_params)
-      redirect_to cart_path(@order_product.order.van), notice: "Order updated successfully."
+    @order = Order.find(params[:id])
+    if @order.update(confirmed_status: true)
+      redirect_to van_orders_path(@order.van), notice: 'Order confirmed.'
     else
-      redirect_to product_path(@order_product.product), alert: "Failed to update order."
+      redirect_to van_orders_path(@order.van), alert: 'Failed to confirm order.'
     end
   end
 
@@ -61,7 +61,7 @@ class OrdersController < ApplicationController
 
   def checkout
     @order = Order.find(params[:order_id])
-    if @order.update(confirmed_status: true)
+    if @order.update(paid_status: true)
       flash[:notice] = "Order successfully checked out!"
       render :checkout
     else
@@ -78,7 +78,8 @@ class OrdersController < ApplicationController
     end
   end
 
-  def order_params
+
+   def order_params
     params.require(:order).permit(:confirmed_status)
   end
 end

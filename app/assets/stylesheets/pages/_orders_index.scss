@@ -20,12 +20,14 @@ h3 {
 
 .card-header, .card-details {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   gap: 0.5rem;
   align-items: center;
 }
 
 .card-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   background-color: #f8f8f8;
   color: #333;
   padding: 1rem;
