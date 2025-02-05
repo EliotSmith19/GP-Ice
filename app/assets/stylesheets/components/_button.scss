@@ -34,7 +34,7 @@
 
 .btn-delete {
   padding: 10px 15px;
-  border: 2px solid rgb(255, 0, 0);
+  border: 2px solid rgba(255, 0, 0, 0);
   border-radius: 20px;
   text-decoration: none;
   color: rgb(255, 0, 0);
@@ -42,6 +42,7 @@
   transition: 0.3s ease;
   margin-right: 5px;
   margin-top: 10px;
+  background-color: transparent;
 
   &:hover {
     background-color: red;
@@ -78,10 +79,30 @@
     color: white;
     font-family: "Ultra", serif;
     transition: 0.3s ease;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.275);
 
     &:hover {
       color: $primary-color;
       font-size: 20px;
     }
+  }
+}
+
+.btn-profile {
+  padding: 10px 15px;
+  border: 2px solid rgba(255, 0, 0, 0);
+  border-radius: 20px;
+  text-decoration: none;
+  color: $pink;
+  font-family: "Nunito", serif;
+  transition: 0.3s ease;
+  margin-right: 5px;
+  margin-top: 10px;
+  background-color: transparent;
+
+  &:hover {
+    background-color: $pink;
+    padding: 10px 25px;
+    color: white;
   }
 }

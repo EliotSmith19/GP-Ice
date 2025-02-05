@@ -1,0 +1,60 @@
+.profile-left {
+  background-color: white;
+  border-radius: 20px;
+  padding: 25px;
+  width: 300px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.274);
+  margin-right: 20px;
+
+  h5 {
+    font-family: "Ultra", serif;
+    color: rgb(0, 0, 0);
+  }
+}
+
+.profile-right {
+  background-color: white;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.274);
+  border-radius: 20px;
+  padding: 25px;
+  width: 700px;
+
+  h2 {
+    font-family: "Ultra", serif;
+    color: rgb(0, 0, 0);
+  }
+
+  input, label {
+    font-family: "Nunito", serif;
+  }
+}
+
+.profile-join {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+
+  h1 {
+    font-family: "Ultra", serif;
+  }
+}
+
+
+@media (min-width: 200px) and (max-width: 1000px) {
+  .profile-join {
+  }
+
+  .profile-left {
+    width: 75%;
+    align-items: center;
+    margin-right: 0px;
+  }
+
+  .profile-right {
+    margin: 20px;
+    width: 75%;
+    align-items: center;
+  }
+}
