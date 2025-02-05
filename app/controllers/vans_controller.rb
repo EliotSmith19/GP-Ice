@@ -31,7 +31,6 @@ class VansController < ApplicationController
         lat: van.latitude,
         lng: van.longitude,
         info_window_html: render_to_string(partial: "info_window", locals: {van: van}),
-        marker_html: render_to_string(partial: "marker", locals: {van: van}),
         marker_html: render_to_string(partial: "marker", locals: {location: location})
       }
     end
@@ -42,17 +41,12 @@ class VansController < ApplicationController
     @products = @van.products
     @inventories = @van.inventories.includes(:product)
     @favourite = Favourite.find_by(van: @van, user: current_user)
-    # @product = @inventories.find_by(product_id: params[:id])
   end
 
   private
 
   def van_find
     @van = Van.find(params[:id])
-  end
-
-  def van_params
-    params.require(:van).permit(:name, :location)
   end
 
   def van_params

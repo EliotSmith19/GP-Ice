@@ -5,5 +5,4 @@ class Inventory < ApplicationRecord
   validates :product_id, :van_id, presence: true
   validates :quantity_available, presence: true, numericality: { greater_than: 0 }
 
-  monetize :price_cents
 end

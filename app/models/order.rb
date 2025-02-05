@@ -11,9 +11,6 @@ class Order < ApplicationRecord
 
   before_validation :set_default_status, on: :create
 
-  validates :checkout_session_id, uniqueness: true, allow_nil: true
-  monetize :amount_cents
-
   private
 
   def set_default_status
