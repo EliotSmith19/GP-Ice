@@ -2,3 +2,9 @@
   display: flex;
   justify-content: space-between;
 }
+
+@media (min-width: 200px) and (max-width: 991.98px) {
+  .card-favourite {
+    flex-direction: column;
+  }
+}

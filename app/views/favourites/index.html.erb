@@ -12,8 +12,8 @@
       <% if @favourites.any? %>
         <% @favourites.each do |favourite| %>
           <div class="card-details card-favourite">
-            <div><%= link_to favourite.van.name, van_path(favourite.van), class: "btn-main" %></div>
-            <div><%= button_to "Remove", favourite_path(favourite), method: :delete, data: {turbo: false}, class: "btn-main" %></div>
+            <%= link_to favourite.van.name, van_path(favourite.van), class: "btn-main" %>
+            <%= button_to "Remove", favourite_path(favourite), method: :delete, data: {turbo: false}, class: "btn-delete" %>
           </div>
         <% end %>
       <% else %>

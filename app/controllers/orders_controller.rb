@@ -28,13 +28,37 @@ class OrdersController < ApplicationController
     @order.van = @van
     @order.confirmed_status = false
     @order.paid_status = false
+
     @product = Product.find(params[:product_id])
+    @inventory = Inventory.find_by(product: @product, van: @van)
+
+    if @inventory.nil?
+      redirect_to root_path, alert: "Product is not available in this van."
+      return
+    end
+
+    total_amount = @inventory.price_cents * params[:quantity_ordered].to_i
+
     if @order.save
       OrderProduct.create(order: @order, product: @product, quantity_ordered: params[:quantity_ordered])
-      redirect_to @order, notice: "Order created successfully!"
+
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [{
+          name: @product.name,
+          images: [@product.photo],
+          amount: total_amount,
+          currency: 'usd',
+          quantity: 1
+        }],
+        success_url: order_url(@order),
+        cancel_url: order_url(@order)
+      )
+
+      @order.update(amount_cents: total_amount, checkout_session_id: session.id)
+      redirect_to new_order_payment_path(@order)
     else
       render :new, status: :unprocessable_entity
-
     end
   end
 
@@ -51,13 +75,11 @@ class OrdersController < ApplicationController
     end
   end
 
-
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
     redirect_to van_orders_path(@order.van), notice: 'Order deleted.'
   end
-
 
   def checkout
     @order = Order.find(params[:order_id])
